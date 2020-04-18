@@ -12,7 +12,11 @@ const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plug
 const { default: WebpackCleanFromOutputPlugin } = require('webpack-clean-from-output-plugin');
 // const WebpackCleanFromOutputPlugin = require('webpack-clean-from-output-plugin');
 
-const { miniCssInitialized, stylusDevModuleRule, stylusProdModuleRule } = require('./styleConfigs');
+const {
+  miniCssInitialized,
+  stylusDevModuleRule, stylusProdModuleRule,
+  cssDevModuleRule, cssProdModuleRule,
+} = require('./styleConfigs');
 const { babelLoaderConfig, babelTestLoaderConfig } = require('./jsTsConfigs');
 const { generateEntryPaths, generateOutputNameJS } = require('./resolution');
 const directPathsToImport = require('./directPathsToImport');
@@ -30,6 +34,7 @@ const developmentConfig = {
     rules: [
       babelLoaderConfig,
       stylusDevModuleRule,
+      cssDevModuleRule,
     ],
   },
   mode: 'development',
@@ -54,6 +59,7 @@ const testConfig = {
     rules: [
       babelTestLoaderConfig,
       stylusDevModuleRule,
+      cssDevModuleRule,
     ],
   },
   mode: 'development',
@@ -85,6 +91,7 @@ const productionConfig = {
     rules: [
       babelLoaderConfig,
       stylusProdModuleRule,
+      cssProdModuleRule,
     ],
   },
   plugins: [

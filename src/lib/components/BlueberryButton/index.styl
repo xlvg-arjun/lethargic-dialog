@@ -1,0 +1,36 @@
+.blueberry-btn
+  background-color #2D92FD
+  // background: #2E92FD;
+  // background: -webkit-linear-gradient(bottom, #2E92FD, #1986FB);
+  // background: -moz-linear-gradient(bottom, #2E92FD, #1986FB);
+  background: linear-gradient(to top, #2E92FD, #1986FB);
+  color #fefefe
+  font-family Helvetica
+  min-width 200px
+  min-height: 25px
+  border none
+  border-radius 4px
+  position relative
+  box-shadow: 0px 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+  font-size 20px
+  line-height: 1.75
+  font-weight: 400
+  letter-spacing 1px
+  
+
+  &:after
+    content: ''
+    position: absolute
+    top: 2px
+    left: 2px
+    width: calc(100% - 4px)
+    height: 50%
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+
+  &:hover
+    // background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(244,250,255,1) 0%, rgba(101,229,255,1) 100%);
+    background: #2E92FD;
+    // background: -webkit-linear-gradient(bottom, #2E92FD, #7AB3F0);
+    // background: -moz-linear-gradient(bottom, #2E92FD, #7AB3F0);
+    background: linear-gradient(to top, #2E92FD, #7AB3F0);

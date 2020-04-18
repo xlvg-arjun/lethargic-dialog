@@ -14,10 +14,20 @@ const miniCssInitialized = new miniCssExtractPlugin({
   },
 });
 
+const cssProdModuleRule = {
+  test: /\.css$/,
+  loader: [miniCssExtractPlugin.loader, 'css-loader'],
+};
+
 const stylusProdModuleRule = {
   test: /\.styl$/,
   loader: [miniCssExtractPlugin.loader, 'css-loader', 'stylus-loader'],
 };
+
+const cssDevModuleRule = {
+  test: /\.css$/,
+  loader: ['style-loader', 'css-loader'],
+}
 
 const stylusDevModuleRule = {
   test: /\.styl$/,
@@ -28,4 +38,6 @@ module.exports = {
   miniCssInitialized,
   stylusProdModuleRule,
   stylusDevModuleRule,
+  cssProdModuleRule,
+  cssDevModuleRule,
 };

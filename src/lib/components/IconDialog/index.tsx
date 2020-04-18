@@ -5,6 +5,9 @@ import findHighestZIndex from 'highest-z-index-of-document';
 
 import { StandardDimmer } from '@xlvg/standard-dimmer';
 
+// import BlueberryButton from '../BlueberryButton';
+import BlueberryButton from 'blueberry-button/libs/components/BlueberryBtn';
+
 import './index.styl';
 
 interface IconDialogProps {
@@ -40,10 +43,13 @@ function IconDialog({ zIndex }: IconDialogProps) {
             </div>
             </div>
           </div>
-          <div className="dialog-row">
-            <button className="dialog-btn">
+          <div className="dialog-row btn-row">
+            {/* <button className="dialog-btn">
               ProtectOk
-          </button>
+            </button> */}
+            <BlueberryButton>
+              ProtectOk
+            </BlueberryButton>
           </div>
         </div>
       </div>
