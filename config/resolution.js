@@ -62,12 +62,15 @@ function generateOutputNameJS(containingFolder, chunkData, directItems=[]) {
 
 function generateOutputNameCSS(containingFolder, chunkData, directItems=[]) {
   const pathOfImportingModule = chunkData.entryModule._identifier.split(' ')[0];
-  const importingFileName = pathOfImportingModule.split(path.sep)[-1].split('.')[0];
+  const importingModulePathSplit = pathOfImportingModule.split(path.sep)
+  const importingModulePathSplitLength = importingModulePathSplit.length;
+  const importingFileName = importingModulePathSplit[importingModulePathSplitLength - 1].split('.')[0];
+  console.log({ 'chunkData.entryModule._identifier': chunkData.entryModule._identifier, chunkData, pathOfImportingModule, importingFileName });
   if (directItems.indexOf(importingFileName) !== -1) {
     return `${importingFileName}.css`;
   }
   if (importingFileName === 'index') {
-    const moduleFolder = pathOfImportingModule.split(path.sep)[-2];
+    const moduleFolder = importingModulePathSplit[importingModulePathSplitLength - 2];
     return `${containingFolder}/${moduleFolder}.css`;
   }
   return `${containingFolder}/${importingFileName}.css`;
