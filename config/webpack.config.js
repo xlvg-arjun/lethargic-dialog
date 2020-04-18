@@ -9,17 +9,20 @@ const merge = require('webpack-merge');
 const terserWebpackPlugin = require('terser-webpack-plugin');
 const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 
+const { default: WebpackCleanFromOutputPlugin } = require('webpack-clean-from-output-plugin');
+// const WebpackCleanFromOutputPlugin = require('webpack-clean-from-output-plugin');
+
 const { miniCssInitialized, stylusDevModuleRule, stylusProdModuleRule } = require('./styleConfigs');
 const { babelLoaderConfig, babelTestLoaderConfig } = require('./jsTsConfigs');
-const { generateEntryPaths, generateOutputNameJS, generateOutputNameCSS } = require('./resolution');
+const { generateEntryPaths, generateOutputNameJS } = require('./resolution');
+const directPathsToImport = require('./directPathsToImport');
 
 const developmentConfig = {
   entry: resolve(__dirname, '..', 'src', 'module', 'index.tsx'),
   output: {
     path: resolve(__dirname, '..', 'dist'),
     filename: '[name].js',
-    filename: (chunkData) => {
-      console.log({ chunkData, 'chunkData.chunk.entryModule': chunkData.chunk.entryModule });
+    filename: () => {
       return '[name].js';
     },
   },
@@ -64,7 +67,7 @@ const testConfig = {
 
 const productionConfig = {
   // entry: resolve(__dirname, '..', 'src', 'lib', 'index.ts'),
-  entry: generateEntryPaths,
+  entry: () => generateEntryPaths(['components'], directPathsToImport),
   mode: 'production',
   optimization: {
     minimizer: [new terserWebpackPlugin(), new optimizeCssAssetsWebpackPlugin()],
@@ -73,7 +76,7 @@ const productionConfig = {
     path: resolve(__dirname, '..', 'libs'),
     // filename: 'bundle.js',
     filename: (chunkData) => {
-      return generateOutputNameJS('components', chunkData);
+      return generateOutputNameJS('components', chunkData, directPathsToImport);
     },
     libraryTarget: 'umd',
     umdNamedDefine: true,
@@ -86,6 +89,13 @@ const productionConfig = {
   },
   plugins: [
     miniCssInitialized,
+    // new WebpackCleanFromOutputPlugin({ filesToClear: ['core.js'] }),
+    // WebpackCleanFromOutputPlugin.default({  })
+    new WebpackCleanFromOutputPlugin({ filesToClear: ['core.js'] }),
+    // new WebpackCleanFromOutputPlugin({  })
+    // new WebpackCleanFromOutputPlugin({ filesToClear: ['core.js'] }),
+    // WebpackCleanFromOutputPlugin
+    // new WebpackCleanFromOutputPlugin({ files })
   ]
 };
 

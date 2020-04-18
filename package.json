@@ -1,5 +1,5 @@
 {
-  "name": "react-reusable-component-boilerplate",
+  "name": "lethargic-dialog",
   "version": "0.0.11",
   "description": "",
   "main": "lib/bundle.js",
@@ -7,13 +7,15 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack-stats:generate": "webpack --env=production --config=config/webpack.config.js --profile > compilation-stats.json",
     "check-types": "tsc",
     "build-types": "tsc --project tsconfig.types.json",
     "rollup": "rollup --config config/rollup.config.js",
     "prepublish": "rm -rf libs && npm run build && npm run build-types",
     "dev": "webpack-dev-server --config config/webpack.config.js --env=development",
     "build": "webpack --config config/webpack.config.js --env=production",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "git-push": "git push origin; git push origin-gitlab"
   },
   "author": "Arjun Raju Pillai <revarjunr@gmail.com>",
   "license": "ISC",
@@ -38,6 +40,7 @@
     "ts-loader": "^7.0.0",
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
+    "webpack-clean-from-output-plugin": "0.0.14",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
@@ -45,7 +48,11 @@
   "dependencies": {
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "@types/react-icons": "^3.0.0",
+    "@xlvg/standard-dimmer": "0.0.1",
+    "highest-z-index-of-document": "0.0.11",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-icons": "^3.9.0"
   }
 }

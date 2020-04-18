@@ -5,6 +5,8 @@ import findHighestZIndex from 'highest-z-index-of-document';
 
 import { StandardDimmer } from '@xlvg/standard-dimmer';
 
+import './index.styl';
+
 interface IconDialogProps {
   zIndex?: number;
 }
