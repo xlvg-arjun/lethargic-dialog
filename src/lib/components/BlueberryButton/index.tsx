@@ -4,11 +4,12 @@ import './index.styl';
 
 interface BlueberryButtonProps {
   children: string;
+  action: Function;
 }
 
-function BlueberryButton({ children }: BlueberryButtonProps) {
+function BlueberryButton({ children, action }: BlueberryButtonProps) {
   return (
-    <button className="blueberry-btn">
+    <button onClick={(evt) => action(evt)} className="blueberry-btn">
       {children}
     </button>
   );
