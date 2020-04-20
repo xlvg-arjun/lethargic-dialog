@@ -3,10 +3,10 @@ import React from 'react';
 import Action from '../../types/Action';
 import Actions from '../../types/Actions';
 
-import BlueberryButton from '../BlueberryButton';
-import WhiteberryButton from '../WhiteberryButton';
-import RaspberryButton from '../RaspberryButton';
-import GreenberryButton from '../GreenberryButton';
+import GreenberryButton from 'blueberry-button/libs/components/GreenberryButton';
+import BlueberryButton from 'blueberry-button/libs/components/BlueberryButton';
+import RaspberryButton from 'blueberry-button/libs/components/RaspberryButton';
+import WhiteberryButton from 'blueberry-button/libs/components/WhiteberryButton';
 
 interface RendererProps {
   action: Action;
