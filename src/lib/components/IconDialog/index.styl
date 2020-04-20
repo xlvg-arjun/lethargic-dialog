@@ -1,3 +1,12 @@
+@keyframes move-from-top-of-screen-to-center {
+  from {
+    top: -100vh
+  }
+  to {
+    top: 50%
+  }
+}
+
 .lethargic-dialog .dialog-actual-container
   position: absolute
   // overflow-y: scroll
@@ -7,6 +16,7 @@
   left: 50%
   // bottom 0
   transform: translate(-50%, -50%)
+  animation: move-from-top-of-screen-to-center 0.75s 1
 
 .lethargic-dialog .dialog-actual
   padding: 0.75rem
@@ -14,12 +24,24 @@
   position: relative;
   min-width: 50vw;
   background-color: #f1f2f6;
-  background-image: linear-gradient(315deg, #f1f2f6 0%, #c9c6c6 100%);
+  background-image: linear-gradient(315deg, #eee 0%, #fff 100%);
   font-family: Helvetica
   background-color: silver
   border-radius: 3px;
   box-shadow: 0px 1px 4px -2px #333;
-  text-shadow: 0px 1px #333;
+  // text-shadow: 0px 1px #333;
+
+  .window-buttons-row
+    margin-top: 0.5rem
+    padding-right 1rem
+    justify-content: flex-end
+    font-size: 1.5rem
+    cursor: crosshair
+    cursor: pointer
+
+  .close-btn
+    color: #222
+    magin-left auto
 
   &:after
     content: ''
@@ -40,7 +62,7 @@
     // align-items: center
   // Note that both are child elements of dialog-row
   .image
-    color: royalblue
+    // color: royalblue
     font-size: 129px
     padding: 1rem
     display flex
@@ -66,7 +88,12 @@
     line-height: 1.47
 
   .btn-row
+    padding-right 1rem
     justify-content: flex-end
+    flex-wrap: wrap
+    margin-bottom 1rem
+    button
+      margin-left: 0.5rem
 
 
 
@@ -77,3 +104,4 @@
     overflow-y scroll
     // padding: 10rem
     // position: relative
+

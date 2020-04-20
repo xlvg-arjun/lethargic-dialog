@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { FaQuestionCircle } from 'react-icons/fa';
+import { IoMdClose } from 'react-icons/io';
 
 import findHighestZIndex from 'highest-z-index-of-document';
 
-import { StandardDimmer } from '@xlvg/standard-dimmer';
+import { StandardDimmer, doesDimmerExist } from '@xlvg/standard-dimmer';
 
 // import BlueberryButton from '../BlueberryButton';
-import BlueberryButton from 'blueberry-button/libs/components/BlueberryBtn';
+// import BlueberryButton from 'blueberry-button/libs/components/BlueberryBtn';
+// import WhiteberryButton from '../WhiteberryButton';
+
+import ButtonChooserRenderer from './ButtonChooserRenderer';
+
+// import Action
+import Action from '../../types/Action';
 
 import './index.styl';
+import Icons from '../../types/Icons';
+import IconChooserRenderer from './IconChooserRenderer';
 
 interface IconDialogProps {
   zIndex?: number;
+  actions: Action[];
+  closeDialog: Function;
+  IconType: Icons;
+  Title?: string;
+  Description?: string;
+  children?: string;
 }
 
-function IconDialog({ zIndex }: IconDialogProps) {
+function IconDialog({ zIndex, actions, closeDialog, IconType, Title, Description, children }: IconDialogProps) {
+  const closingFn = (evt: SyntheticEvent) => { closeDialog(evt); };
   let zIndexDialog = undefined;
   let zIndexDimmer = undefined;
   if (zIndex || (zIndex === 0)) {
@@ -27,29 +43,32 @@ function IconDialog({ zIndex }: IconDialogProps) {
   const zIndexUnaffectedByOverlay = zIndexDialog + 1;
   return (
     <div className="lethargic-dialog icon-dialog outer">
-      <StandardDimmer zIndex={zIndex} />
+      { doesDimmerExist() && <StandardDimmer zIndex={zIndex} />}
       <div style={{ zIndex: zIndexDialog }} className="dialog-actual-container">
         <div className="dialog-actual">
+          <div className="dialog-row window-buttons-row">
+            <IoMdClose onClick={(evt: SyntheticEvent) => closingFn(evt)} className="close-btn" style={{ position: 'relative', zIndex: zIndexUnaffectedByOverlay }} />
+          </div>
           <div className="dialog-row main-row">
-            <div className="image">
-              <FaQuestionCircle style={{position: 'relative', zIndex: zIndexUnaffectedByOverlay}} className="image-content" />
-            </div>
-            <div style={{position: 'relative', zIndex: zIndexUnaffectedByOverlay}} className="dialog-content">
+            {(IconType !== Icons.None) &&
+              <IconChooserRenderer IconType={IconType} zIndex={zIndexUnaffectedByOverlay} />
+            }
+            <div style={{ position: 'relative', zIndex: zIndexUnaffectedByOverlay }} className="dialog-content">
               <h4 className="title">
-                Title
-            </h4>
+                {Title || ''}
+              </h4>
               <div className="text-content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A sit ipsam, asperiores pariatur temporibus, alias dignissimos impedit assumenda error dolores nam quo dolorum numquam dicta! Molestias quia quis in natus.
-            </div>
+                {Description || ''}
+              </div>
             </div>
           </div>
+          {children && <div className="dialog-row additional-content">
+            {children}
+          </div>}
           <div className="dialog-row btn-row">
-            {/* <button className="dialog-btn">
-              ProtectOk
-            </button> */}
-            <BlueberryButton>
-              ProtectOk
-            </BlueberryButton>
+            {
+              actions.map((actionitem) => <ButtonChooserRenderer action={actionitem} closingFn={closingFn} />)
+            }
           </div>
         </div>
       </div>
