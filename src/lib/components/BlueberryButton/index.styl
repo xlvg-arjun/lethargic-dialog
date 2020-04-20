@@ -3,7 +3,7 @@
   // background: #2E92FD;
   // background: -webkit-linear-gradient(bottom, #2E92FD, #1986FB);
   // background: -moz-linear-gradient(bottom, #2E92FD, #1986FB);
-  // background: linear-gradient(to top, #3Ea2FD, #69a6FB);
+  background: linear-gradient(to bottom, darken(#3Ea2FD, 10%), darken(#69a6FB, 10%));
   color #fefefe
   font-family Helvetica
   min-width 150px
@@ -28,11 +28,13 @@
     left: 2px
     width: calc(100% - 4px)
     height: 50%
-    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.1));
 
   &:hover
+    background: linear-gradient(to bottom, lighten(#3Ea2FD, 40%), lighten(#69a6FB, 40%));
+    background: linear-gradient(to bottom, blue, lighten(darkblue, 10%));
     &:after
-      background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+      background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
     // background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(244,250,255,1) 0%, rgba(101,229,255,1) 100%);
     background: #2E92FD;
     // background: -webkit-linear-gradient(bottom, #2E92FD, #7AB3F0);
